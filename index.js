@@ -1,16 +1,26 @@
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const { ApiGetFun } = require("./hepler");
+app.use(cors());
+app.use(express.json());
 
-const express=require('express')
+app.get("/", (req, res) => {
+  res.send("welcome");
+});
 
-const app=express()
-app.use(express.json())
+app.post("/putapi", async (req, res) => {
+  const api = req.body.url;
+  console.log(api);
+  try {
+    let data = await ApiGetFun(api);
+    console.log(data, "data");
+    return res.json({ res: data });
+  } catch (error) {
+    console.log(error, "internal sever error");
+  }
+});
 
-const port = process.env.PORT || 3000;
-require('dotenv').config()
-
-
-
-
-
-app.listen(port, () => {
-  console.log(`server running at ${port} `)
-  });
+app.listen(process.env.PORT || 8080, () => {
+  console.log("running");
+});
