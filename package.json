@@ -8,7 +8,7 @@
   },
   "scripts": {
    
-    "server": "index.js"
+    "server": "nodemon index.js"
   },
   "name": "rihan_test_aws",
   "description": "",
